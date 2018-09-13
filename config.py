@@ -10,3 +10,4 @@ class DevConfig(Config):
     """Devlopment config class."""
     #open DEBUG
     DEBUG = True
+    database_url = ""
