@@ -4,13 +4,49 @@
 {{ super() }}
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    面板标题
+        <div class="col-md-9">
+            <div class="post-preview">
+                <a href="#">
+                    <h5 class="post-title">
+                        Hello Blog
+                    </h5>
+                    <h5 class="post-subtitle">
+                        For Test!^_^
+                    </h5>
+                </a>
+                <p class="post-meta">
+                    Start Bootstrap4 on September 1, 2018
+                </p>
+            </div>
+            <hr>
+            <div class="post-preview">
+                <a href="#">
+                    <h5 class="post-title">
+                        Hello Blog
+                    </h5>
+                    <h5 class="post-subtitle">
+                        For Test!^_^
+                    </h5>
+                </a>
+                <p class="post-meta">
+                    Start Bootstrap4 on September 1, 2018
+                </p>
+            </div>
+            <hr>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <img class="card-img-top" src="{{ url_for('static', filename='img/home-bg.jpg') }}">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
-                <div class="panel-body">
-                    这是一个基本的面板
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="{{ url_for('static', filename='img/header-bg.jpg') }}">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
             </div>
         </div>
