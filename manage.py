@@ -1,26 +1,21 @@
 #_*_coding:utf-8_*_
 from sqlalchemy import *
-from sqlalchemy.ext.declarative import declarative_base
+from models import Base
 from config import *
 
-engine = create_engine(DevConfig.database_url, encoding='utf-8', echo=True)
-
 '''
-数据库初步设计
------------------
---article文章表
------------------
-id              //自增id
-title           //文章标题
-content         //文章内容，markdown文本
-tag             //标签字符串，用';'间隔多个标签
-post_time       //上传时间
-
-
-
------------------
---tag标签表
------------------
-id              //自增id
-tag_name        //标签名
+以下操作的前提是数据库是存在的！
 '''
+
+def init_tables():
+    '''初始化数据表'''
+    engine = create_engine(DevConfig.database_url, encoding='utf-8', echo=True) #连接数据库
+    Base.metadata.create_all(engine)        #建表
+    print("Tables init --- Success!")
+
+def drop_tables():
+    '''删除所有表'''
+    engine = create_engine(DevConfig.database_url, encoding='utf-8', echo=True)  # 连接数据库
+    Base.metadata.drop_all(engine)
+    print("Tables delete --- Success!")
+
