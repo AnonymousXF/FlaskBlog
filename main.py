@@ -1,3 +1,4 @@
+#_*_coding:utf-8_*_
 from flask import Flask, render_template
 from config import *
 
