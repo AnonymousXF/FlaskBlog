@@ -1,3 +1,4 @@
+#_*_coding:utf-8_*_
 from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
 from config import *
