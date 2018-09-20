@@ -1,3 +1,4 @@
+#_*_coding:utf-8_*_
 class Config(object):
     """Base config class."""
     pass
