@@ -223,6 +223,8 @@ app/templates/list_by_tag.html
 
 app/templates/list_by_date.html
 
+app/templates/article.html
+
 app/blog/__ init __.py
 ```python
 #_*_coding:utf-8_*_
