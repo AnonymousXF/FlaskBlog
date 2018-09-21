@@ -11,4 +11,4 @@ class DevConfig(Config):
     """Devlopment config class."""
     #open DEBUG
     DEBUG = True
-    database_url = ""
+    database_url = "mysql://root:password@ip:port/database?charset=utf8"

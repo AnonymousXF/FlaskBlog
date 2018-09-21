@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" style="margin-bottom: 40px">
+            <select class='custom-select' id="list_type" onchange="">
+                <option value="date">按日期列出</option>
+                <option value="tag">按标签列出</option>
+            </select>
+        </div>
+        <div class="col-md-9">
+            <h5>BlogList</h5>
+            <div id="article_list">
+                {% include "list_by_tag.html" %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Tags</h5>
+                    {% for tag in tags %}
+                    <a href="#"><span class="badge badge-success">{{ tag.tag_name }}</span></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

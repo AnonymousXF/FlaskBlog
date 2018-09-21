@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="container">
+    <div class="row">
+        <!--最近几篇文章显示区域-->
+        <div class="col-md-9">
+            <div class="page-heading"><h1><span class="badge badge-primary">Lastest</span></h1></div>
+            {% for article in articles %}
+            <div class="post-preview">
+                <a href="#">
+                    <h5 class="post-title" style="font-size: x-large">
+                        {{ article.title }}
+                    </h5>
+                </a>
+                <p class="post-subtitle">
+                    Tags:
+                    {% for article_tag in article.tag.split(';') %}
+                    <a href="#"><span class="badge badge-success">{{ article_tag }}</span></a>
+                    {% endfor %}
+                </p>
+                <p class="post-meta">
+                    {{ "Post at " + article.post_time|string }}
+                </p>
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+        <!--右侧标签区域-->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Tags</h5>
+                    {% for tag in tags %}
+                    <a href="#"><span class="badge badge-success">{{ tag.tag_name }}</span></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

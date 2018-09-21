@@ -1,0 +1,14 @@
+{% for tag in tags %}
+<div style="margin-bottom: 40px">
+    <h3><span class="badge badge-primary">{{ tag.tag_name }}</span></h3><hr>
+    {% for article in articles %}
+        {% if tag.tag_name in article.tag %}
+            <div class="post-preview">
+                <a class="post-meta" href="{{ url_for("blog.article_detail", article_id=article.id) }}">
+                    <p>{{ article.post_time.date()|string + "   "  + article.title }}</p>
+                </a>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endfor %}
