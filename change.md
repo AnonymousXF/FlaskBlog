@@ -233,7 +233,7 @@ app/templates/article.html
 {{ super() }}
 <div class="container">
     <div class="col-md-10 text-center">
-        test
+        {{ article.content|safe }}
     </div>
 </div>
 {% endblock %}
@@ -261,10 +261,11 @@ from ..models import Tag, Article
 @blog.route('/', methods=['GET','POST'])
 def bloglist():
     tags = db_session.query(Tag).all()
-    articles = db_session.query(Article).order_by(Article.post_time)
+    articles = db_session.query(Article.id, Article.title, Article.tag, Article.post_time).order_by(Article.post_time)
     return render_template("bloglist.html", tags=tags, articles=articles)
 
 @blog.route('/article_detail/<article_id>')
 def article_detail(article_id):
+    article = db_session.query(Article).filter(Article.id == article_id).first()
     return render_template("article.html")  
 ```
