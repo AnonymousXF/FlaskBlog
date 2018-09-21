@@ -1,5 +1,3 @@
-
-
 目录结构
 
 - app
@@ -50,6 +48,15 @@ def insert_test_data():
     db_session.add(tag1)
     db_session.add(tag2)
     db_session.add(tag3)
+    db_session.commit()
+    
+def insert_test_artical_data():
+    artical1 = Article(title='test1', content='test content1!\n======1======\n*****1*****', tag='Python')
+    artical2 = Article(title='test2', content='test content2!\n======2======\n*****2*****', tag='Selenium')
+    artical3 = Article(title='test3', content='test content3!\n======3======\n*****3*****', tag='自动化;Python')
+    db_session.add(artical1)
+    db_session.add(artical2)
+    db_session.add(artical3)
     db_session.commit()
 ```
 
@@ -111,6 +118,53 @@ from ..models import Tag, Article
 @home.route('/', methods=['GET'])
 def index():
     tags = db_session.query(Tag).all()
-    return render_template('index.html', tags=tags)
+    articles = db_session.query(Article).order_by(Article.post_time)
+    return render_template('index.html', tags=tags, articles=articles)
 ```
 
+app/templates/index.html
+
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="container">
+    <div class="row">
+        <!--最近几篇文章显示区域-->
+        <div class="col-md-9">
+            {% for article in articles %}
+            <div class="post-preview">
+                <a href="#">
+                    <h5 class="post-title" style="font-size: x-large">
+                        {{ article.title }}
+                    </h5>
+                </a>
+                <p class="post-subtitle">
+                    Tags:
+                    {% for article_tag in article.tag.split(';') %}
+                    <a href="#"><span class="badge badge-success">{{ article_tag }}</span></a>
+                    {% endfor %}
+                </p>
+                <p class="post-meta">
+                    {{ "Post at " + article.post_time|string }}
+                </p>
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+        <!--右侧标签区域-->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Tags</h5>
+                    {% for tag in tags %}
+                    <a href="#"><span class="badge badge-success">{{ tag.tag_name }}</span></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+```
