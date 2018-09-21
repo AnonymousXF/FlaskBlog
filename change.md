@@ -169,3 +169,82 @@ app/templates/index.html
 </div>
 {% endblock %}
 ```
+
+app/templates/bloglist.html
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" style="margin-bottom: 40px">
+            <select class='custom-select' id="list_type" onchange="">
+                <option value="date">按日期列出</option>
+                <option value="tag">按标签列出</option>
+            </select>
+        </div>
+        <div class="col-md-9">
+            <h5>BlogList</h5>
+            <div id="article_list">
+                {% include "list_by_tag.html" %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Tags</h5>
+                    {% for tag in tags %}
+                    <a href="#"><span class="badge badge-success">{{ tag.tag_name }}</span></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+```
+
+app/templates/list_by_tag.html
+```html
+{% for tag in tags %}
+<div style="margin-bottom: 40px">
+    <h3><span class="badge badge-primary">{{ tag.tag_name }}</span></h3><hr>
+    {% for article in articles %}
+        {% if tag.tag_name in article.tag %}
+            <div class="post-preview">
+                <a class="post-meta" href=""><p>{{ article.post_time.date()|string + "   "  + article.title }}</p></a>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endfor %}
+```
+
+app/templates/list_by_date.html
+
+app/blog/__ init __.py
+```python
+#_*_coding:utf-8_*_
+from flask import Blueprint
+
+blog = Blueprint('blog',__name__)
+
+from . import views
+```
+
+app/blog/views.py
+```python
+#_*_coding:utf-8_*_
+from flask import render_template
+
+from . import blog
+from .. import db_session
+from ..models import Tag, Article
+
+@blog.route('/', methods=['GET','POST'])
+def bloglist():
+    tags = db_session.query(Tag).all()
+    articles = db_session.query(Article).order_by(Article.post_time)
+    return render_template("bloglist.html", tags=tags, articles=articles)
+```
