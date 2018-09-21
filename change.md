@@ -133,6 +133,7 @@ app/templates/index.html
     <div class="row">
         <!--最近几篇文章显示区域-->
         <div class="col-md-9">
+            <div class="page-heading"><h1><span class="badge badge-primary">Lastest</span></h1></div>
             {% for article in articles %}
             <div class="post-preview">
                 <a href="#">
