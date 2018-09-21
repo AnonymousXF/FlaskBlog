@@ -213,7 +213,9 @@ app/templates/list_by_tag.html
     {% for article in articles %}
         {% if tag.tag_name in article.tag %}
             <div class="post-preview">
-                <a class="post-meta" href=""><p>{{ article.post_time.date()|string + "   "  + article.title }}</p></a>
+                <a class="post-meta" href="{{ url_for("blog.article_detail", article_id=article.id) }}">
+                    <p>{{ article.post_time.date()|string + "   "  + article.title }}</p>
+                </a>
             </div>
         {% endif %}
     {% endfor %}
@@ -224,6 +226,18 @@ app/templates/list_by_tag.html
 app/templates/list_by_date.html
 
 app/templates/article.html
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="container">
+    <div class="col-md-10 text-center">
+        test
+    </div>
+</div>
+{% endblock %}
+```
 
 app/blog/__ init __.py
 ```python
@@ -249,4 +263,8 @@ def bloglist():
     tags = db_session.query(Tag).all()
     articles = db_session.query(Article).order_by(Article.post_time)
     return render_template("bloglist.html", tags=tags, articles=articles)
+
+@blog.route('/article_detail/<article_id>')
+def article_detail(article_id):
+    return render_template("article.html")  
 ```
