@@ -6,14 +6,12 @@
     <div class="row">
         <div class="col-md-8" style="text-align: right"><h6>按标签筛选:</h6></div>
         <div class="col-md-4" style="margin-bottom: 40px;">
-            <form id="taglist">
-                <select class='custom-select' id="list_type" onchange="change();">
-                    <option value="all">全部</option>
-                    {% for tag in tags %}
+            <select class='custom-select' id="taglist" onchange="change();">
+                <option value="all">全部</option>
+                {% for tag in tags %}
                     <option value="{{ tag.tag_name }}">{{ tag.tag_name }}</option>
-                    {% endfor %}
-                </select>
-            </form>
+                {% endfor %}
+            </select>
         </div>
     </div>
     <div class="row">
