@@ -4,8 +4,9 @@
             <p>{{ article.post_time.date()|string + "   "  + article.title }}</p>
         </a>
         <div class="row">
+        &nbsp;&nbsp;&nbsp;
         {% for tag in article.tag.split(';') %}
-        <h5><span class="badge badge-success">{{ tag }}</span></h5>&nbsp;
+            <h6><span class="badge badge-info">{{ tag }}</span></h6>&nbsp;
         {% endfor %}
         </div>
     </div>
