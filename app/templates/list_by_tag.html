@@ -1,6 +1,6 @@
 <div style="margin-bottom: 40px">
     {% if tag_name != "全部" %}
-    <h4><span class="badge badge-primary">{{ tag_name }}</span></h4><hr>
+    <h4><span class="badge badge-pill badge-dark">{{ tag_name }}</span></h4><hr>
     {% endif %}
     {% for article in articles %}
         <div class="post-preview">
@@ -11,7 +11,7 @@
         <div class="row">
         &nbsp;&nbsp;&nbsp;
         {% for tag in article.tag.split(';') %}
-            <h6><span class="badge badge-info">{{ tag }}</span></h6>&nbsp;
+            <h6><span class="badge badge-pill badge-info">{{ tag }}</span></h6>&nbsp;
         {% endfor %}
         </div>
     {% endfor %}
