@@ -4,28 +4,50 @@
 {{ super() }}
 <div class="container">
     <div class="row">
-        <div class="col-md-4" style="margin-bottom: 40px">
-            <select class='custom-select' id="list_type" onchange="">
-                <option value="date">按日期列出</option>
-                <option value="tag">按标签列出</option>
-            </select>
-        </div>
-        <div class="col-md-9">
-            <h5>BlogList</h5>
-            <div id="article_list">
-                {% include "list_by_tag.html" %}
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Tags</h5>
+        <div class="col-md-8" style="text-align: right"><h6>按标签筛选:</h6></div>
+        <div class="col-md-4" style="margin-bottom: 40px;">
+            <form id="taglist">
+                <select class='custom-select' id="list_type" onchange="change();">
+                    <option value="all">全部</option>
                     {% for tag in tags %}
-                    <a href="#"><span class="badge badge-success">{{ tag.tag_name }}</span></a>
+                    <option value="{{ tag.tag_name }}">{{ tag.tag_name }}</option>
                     {% endfor %}
-                </div>
-            </div>
+                </select>
+            </form>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <h4>BlogList</h4>
+            <div id="article_list" style="margin-top: 30px">
+                {% include "list_by_date.html" %}
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+function change() {
+    var tag = $("#taglist").find("option:selected").text();
+    var data = {"tag":tag};
+    $.ajax({
+        type: 'POST',
+        url: "{{ url_for('blog.list_by_tag') }}",
+        data: JSON.stringify(data),
+        contentType: 'application/json; charset=UTF-8',
+        dataType: 'html',
+        success:function (data) {
+            $("#article_list").html(data);
+        },
+        error:function (data) {
+            alert("Failed");
+        }
+    });
+}
+</script>    
 {% endblock %}
