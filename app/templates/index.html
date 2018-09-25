@@ -17,7 +17,7 @@
                 <p class="post-subtitle">
                     Tags:
                     {% for article_tag in article.tag.split(';') %}
-                    <a><span class="badge badge-info">{{ article_tag }}</span></a>
+                    <a><span class="badge badge-pill badge-info">{{ article_tag }}</span></a>
                     {% endfor %}
                 </p>
                 <p class="post-meta">
@@ -33,7 +33,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Tags</h5>
                     {% for tag in tags %}
-                    <a><span class="badge badge-info">{{ tag.tag_name }}</span></a>
+                    <a><span class="badge badge-pill badge-info">{{ tag.tag_name }}</span></a>
                     {% endfor %}
                 </div>
             </div>
