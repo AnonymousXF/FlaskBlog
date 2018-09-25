@@ -6,10 +6,10 @@
     <div class="row">
         <!--最近几篇文章显示区域-->
         <div class="col-md-9">
-            <div class="page-heading"><h1><span class="badge badge-primary">Lastest</span></h1></div>
+            <div class="page-heading"><h1><span class="badge badge-success">Lastest</span></h1></div>
             {% for article in articles %}
             <div class="post-preview">
-                <a href="#">
+                <a href="{{ url_for("blog.article_detail", article_id=article.id) }}">
                     <h5 class="post-title" style="font-size: x-large">
                         {{ article.title }}
                     </h5>
@@ -17,7 +17,7 @@
                 <p class="post-subtitle">
                     Tags:
                     {% for article_tag in article.tag.split(';') %}
-                    <a><span class="badge badge-success">{{ article_tag }}</span></a>
+                    <a><span class="badge badge-info">{{ article_tag }}</span></a>
                     {% endfor %}
                 </p>
                 <p class="post-meta">
@@ -33,7 +33,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Tags</h5>
                     {% for tag in tags %}
-                    <a href="#"><span class="badge badge-success">{{ tag.tag_name }}</span></a>
+                    <a><span class="badge badge-info">{{ tag.tag_name }}</span></a>
                     {% endfor %}
                 </div>
             </div>
