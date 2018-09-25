@@ -3,8 +3,24 @@
 {% block content %}
 {{ super() }}
 <div class="container">
-    <div class="col-md-10 text-center">
-        {{ article.content|safe }}
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8"><h2 class="post-title">{{ article.title }}</h2></div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8" id="article_markdown">{{ article.content | safe }}</div>
+        <div class="col-md-2"></div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+$(document).ready(function () {
+    $("#article_markdown").html(marked($("#article_markdown").html()));
+})
+</script>
 {% endblock %}
