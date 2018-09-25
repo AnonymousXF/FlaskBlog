@@ -1,14 +1,17 @@
-{% for tag in tags %}
 <div style="margin-bottom: 40px">
-    <h3><span class="badge badge-primary">{{ tag.tag_name }}</span></h3><hr>
+    {% if tag_name != "全部" %}
+    <h4><span class="badge badge-primary">{{ tag_name }}</span></h4><hr>
+    {% endif %}
     {% for article in articles %}
-        {% if tag.tag_name in article.tag %}
-            <div class="post-preview">
-                <a class="post-meta" href="{{ url_for("blog.article_detail", article_id=article.id) }}">
-                    <p>{{ article.post_time.date()|string + "   "  + article.title }}</p>
-                </a>
-            </div>
-        {% endif %}
+        <div class="post-preview">
+            <a class="post-meta" href="{{ url_for("blog.article_detail", article_id=article.id) }}">
+                <p>{{ article.post_time.date()|string + "   "  + article.title }}</p>
+            </a>
+        </div>
+        <div class="row">
+        {% for tag in article.tag.split(';') %}
+            <h5><span class="badge badge-success">{{ tag }}</span></h5>&nbsp;
+        {% endfor %}
+        </div>
     {% endfor %}
 </div>
-{% endfor %}
