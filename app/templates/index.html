@@ -17,7 +17,7 @@
                 <p class="post-subtitle">
                     Tags:
                     {% for article_tag in article.tag.split(';') %}
-                    <a href="#"><span class="badge badge-success">{{ article_tag }}</span></a>
+                    <a><span class="badge badge-success">{{ article_tag }}</span></a>
                     {% endfor %}
                 </p>
                 <p class="post-meta">
