@@ -5,8 +5,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-2"></div>
-        <div id="article_title"><h2 class="post-title" style="margin-bottom: 40px">{{ article.title }}</h2></div>
-        <div class="col-md-8" id="article_markdown">{{ article.content | safe }}</div>
+        <div class="col-md-8">
+            <div id="article_title"><h2 class="post-title" style="margin-bottom: 40px">{{ article.title }}</h2></div>
+            <div id="article_markdown">{{ article.content | safe }}</div>
+        </div>
         <div class="col-md-2"></div>
     </div>
 </div>
@@ -14,9 +16,13 @@
 
 {% block scripts %}
 {{ super() }}
+<script>hljs.initHighlightingOnLoad();</script>
 <script>
 $(document).ready(function () {
     $("#article_markdown").html(marked($("#article_markdown").html()));
-})
+    $('pre code').each(function (i, block) {
+        hljs.highlightBlock(block);
+    });
+});
 </script>
 {% endblock %}
